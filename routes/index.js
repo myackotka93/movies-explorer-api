@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const routes = require('express').Router();
 const authMiddleware = require('../middlewares/auth');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
@@ -12,4 +12,4 @@ routes.post('/signup', signupValidation, signUp);
 routes.use('/users', authMiddleware, usersRouter);
 routes.use('/movies', authMiddleware, moviesRouter);
 
-module.exports = router;
+module.exports = routes;

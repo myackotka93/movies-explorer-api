@@ -28,15 +28,16 @@ module.exports.signUp = (req, res, next) => {
       .send({
         _id: user._id,
         email: user.email,
-        name: user.name }))
+        name: user.name,
+      }))
     .catch((err) => {
       if (err.name === 'MongoError' || err.code === 11000) {
-        next (new ConflictError('Пользователь с таким email уже существует'));
+        next(new ConflictError('Пользователь с таким email уже существует'));
       } else if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next (new BadRequestError('Пароль или почта некорректны'));
+        next(new BadRequestError('Пароль или почта некорректны'));
       }
-    })
-    .next(err);
+      next(err);
+    });
 };
 
 module.exports.signIn = (req, res, next) => {
@@ -60,6 +61,6 @@ module.exports.signIn = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'Error') next(new AuthorizedError(err.message));
-      next(укк)
+      next(err);
     });
 };
