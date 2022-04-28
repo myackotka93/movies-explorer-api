@@ -1,7 +1,7 @@
 {
   "name": "movie",
   "version": "1.0.0",
-  "description": "",
+  "description": "diploma project",
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint .",
@@ -33,6 +33,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.4.0",
     "express-validator": "^6.14.0",
     "express-winston": "^4.2.0",
     "helmet": "^5.0.2",

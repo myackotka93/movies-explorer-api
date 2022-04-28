@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const validator = require('validator');
+const { urlValidation } = require('../errors/error-celebrate');
 
 module.exports.signupValidation = celebrate({
   body: Joi
@@ -48,27 +48,9 @@ module.exports.movieValidation = celebrate({
       year: Joi.string().required(),
       description: Joi.string().required(),
       owner: Joi.string().length(24),
-      image: Joi.string().required()
-        .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
-            return value;
-          }
-          return helpers.message('Неправильный формат ссылки');
-        }),
-      trailer: Joi.string().required()
-        .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
-            return value;
-          }
-          return helpers.message('Неправильный формат ссылки');
-        }),
-      thumbnail: Joi.string().required()
-        .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
-            return value;
-          }
-          return helpers.message('Неправильный формат ссылки');
-        }),
+      image: Joi.string().required().custom(urlValidation),
+      trailer: Joi.string().required().custom(urlValidation),
+      thumbnail: Joi.string().required().custom(urlValidation),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
