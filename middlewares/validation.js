@@ -24,9 +24,9 @@ module.exports.userInfoValidation = celebrate({
   body: Joi
     .object()
     .keys({
-      name: Joi.string().min(2).max(30),
-      email: Joi.string().email(),
-      password: Joi.string().min(4),
+      name: Joi.string().required().min(2).max(30),
+      email: Joi.string().required().email(),
+      password: Joi.string().required().min(4),
     }),
 });
 
@@ -49,7 +49,7 @@ module.exports.movieValidation = celebrate({
       description: Joi.string().required(),
       owner: Joi.string().length(24),
       image: Joi.string().required().custom(urlValidation),
-      trailer: Joi.string().required().custom(urlValidation),
+      trailerLink: Joi.string().required().custom(urlValidation),
       thumbnail: Joi.string().required().custom(urlValidation),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
