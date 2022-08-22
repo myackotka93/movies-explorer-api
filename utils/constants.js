@@ -9,8 +9,9 @@ const EMAIL_ERROR = 'Неправильный формат почты';
 const LINK_ERROR = 'Неверный формат ссылки';
 const SERVER_ERROR = 'На сервере произошла ошибка';
 const NOT_FOUND_ERROR = 'Ресурс не найден';
+
 const corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
 };
 
