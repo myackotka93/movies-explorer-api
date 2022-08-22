@@ -11,7 +11,7 @@ const SERVER_ERROR = 'На сервере произошла ошибка';
 const NOT_FOUND_ERROR = 'Ресурс не найден';
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://diplom.myackotka.nomoredomains.work/signup', 'https://api.diplom.myackotka.nomoredomains.work/signup'],
   credentials: true,
 };
 
