@@ -30,11 +30,22 @@ module.exports.signUp = (req, res, next) => {
       email,
       password: hash
     }))
-    .then((user) => res.send({
-      _id: user._id,
-      email: user.email,
-      name: user.name,
-    }))
+    .then((user) => {      
+      const token = jwt.sign({
+        _id: user._id
+      }, JWT_SECRET, {
+        expiresIn: '7d'
+      });
+      const data = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      };
+      res.send({
+        data,
+        token
+      });
+    })
     .catch((err) => {
       if (err.name === 'MongoError' || err.code === 11000) {
         next(new ConflictError(MONGO_ERROR));
@@ -67,11 +78,10 @@ module.exports.signIn = (req, res, next) => {
         name: user.name,
         email: user.email,
       };
-      res
-        .send({
-          data,
-          token
-        });
+      res.send({
+        data,
+        token
+      });
     })
     .catch((err) => {
       if (err.name === 'Error') next(new AuthorizedError(UNAUTHORIZED_ERROR));
